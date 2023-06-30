@@ -1,3 +1,8 @@
 *~
+build*/*
+!build*/conf
+build*/conf/templateconf.cfg
+meta-ke
+.ccls-cache
 downloads
 sstate-cache
