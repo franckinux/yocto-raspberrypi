@@ -22,9 +22,9 @@ USERADD_PARAM:${PN} = "-p '\$5\$00000000\$EexRKUwOMtYkYl6TNNON2KP4j3mogiFKoIo26C
 
 
 do_install () {
-	install -d -m 755 ${D}/home/domotic
-	install -d -m 755 ${D}/home/domotic/.ssh
-	install -p -m 644 ${S}/domotic-ssh-key.pub ${D}/home/domotic/.ssh/authorized_keys
+	install -d -m 700 ${D}/home/domotic
+	install -d -m 700 ${D}/home/domotic/.ssh
+	install -p -m 600 ${S}/domotic-ssh-key.pub ${D}/home/domotic/.ssh/authorized_keys
 	chown -R domotic ${D}/home/domotic
 	chgrp -R domotic ${D}/home/domotic
 }
