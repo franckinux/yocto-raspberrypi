@@ -13,9 +13,23 @@ SRC_URI = " \
     "
 S = "${WORKDIR}"
 
-# inherit setuptools3 systemd
-inherit setuptools3
+inherit setuptools3 systemd
 
 RDEPENDS:${PN} += " \
     ${PYTHON_PN}-aiohttp \
 "
+
+SRC_URI += "\
+    file://domotik.service \
+    "
+
+SYSTEMD_SERVICE:${PN} = "domotik.service"
+FILES:${PN} += "${systemd_unitdir}/system/domotik.service"
+# FILES:${PN} += "${sysconfdir}/domotik.toml"
+
+do_install:append() {
+  # install -d ${D}/${sysconfdir}/domotik
+  # install -m 0644 ${S}/config.toml ${D}/${sysconfdir}/domotik.toml
+  install -d ${D}/${systemd_unitdir}/system
+  install -m 0644 ${WORKDIR}/domotik.service ${D}/${systemd_unitdir}/system
+}
